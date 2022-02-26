@@ -6,13 +6,13 @@ from starlette.concurrency import run_in_threadpool
 app = FastAPI()
 
 
-def send_email(message: str):
+def send_email(message: str) -> None:
     time.sleep(2)
     print(f"sent {message}")
 
 
 @app.websocket("/ws/send-notification/{domain}")
-async def websocket_endpoint(websocket: WebSocket, domain: str):
+async def websocket_endpoint(websocket: WebSocket, domain: str) -> None:
     await websocket.accept()
     while True:
         try:
