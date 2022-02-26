@@ -1,6 +1,6 @@
 # fasttask
 
-FastAPI Background Task Demo using HTTP and Websockets
+FastAPI example of running in the background and responded using Websockets
 
 ## Contributing
 
