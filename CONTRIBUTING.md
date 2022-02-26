@@ -5,6 +5,7 @@
 - make
 - node (required for pyright)
 - python >= 3.7
+- [websocat](https://github.com/vi/websocat)
 
 ## Getting started
 
