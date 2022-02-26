@@ -9,7 +9,7 @@ setup(
     package_data={
         "": ["py.typed"],
     },
-    install_requires=[],
+    install_requires=["fastapi~=0.74", "uvicorn[standard]~=0.17"],
     extras_require={
         "dev": [
             "autoflake~=1.4",

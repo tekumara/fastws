@@ -1,10 +1,26 @@
-import sys
-from typing import List
+from typing import Optional
+
+from fastapi import BackgroundTasks, Depends, FastAPI
+
+app = FastAPI()
 
 
-def main(args: List[str] = sys.argv[1:]) -> None:
-    print(f"hello {args[0]}!")
+def write_log(message: str):
+    with open("log.txt", mode="a") as log:
+        log.write(message)
 
 
-if __name__ == "__main__":
-    main()
+def get_query(background_tasks: BackgroundTasks, q: Optional[str] = None):
+    if q:
+        message = f"found query: {q}\n"
+        background_tasks.add_task(write_log, message)
+    return q
+
+
+@app.post("/send-notification/{email}")
+async def send_notification(
+    email: str, background_tasks: BackgroundTasks, q: str = Depends(get_query)
+):
+    message = f"message to {email}\n"
+    background_tasks.add_task(write_log, message)
+    return {"message": "Message sent"}
