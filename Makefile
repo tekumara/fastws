@@ -6,7 +6,7 @@ run:
 
 # connect to websocket
 ws:
-	@echo "Enter any message to start the background task"
+	@echo "Enter any message to send a background email!"
 	websocat ws://localhost:8000/ws/send-notification/awesome.io
 
 include *.mk

@@ -1,6 +1,6 @@
 # fastws
 
-FastAPI example of running in the background and responded using Websockets
+FastAPI example of running in the background and responding via a Websocket
 
 ## Contributing
 
