@@ -1,11 +1,12 @@
 from typing import Optional
-
+import time
 from fastapi import BackgroundTasks, Depends, FastAPI
 
 app = FastAPI()
 
 
 def write_log(message: str):
+    time.sleep(10)
     with open("log.txt", mode="a") as log:
         log.write(message)
 
