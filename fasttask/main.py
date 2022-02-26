@@ -7,7 +7,7 @@ app = FastAPI()
 
 
 def write_log(message: str):
-    time.sleep(10)
+    time.sleep(2)
     with open("log.txt", mode="a") as log:
         log.write(message)
 
@@ -26,20 +26,21 @@ async def send_notification(email: str, background_tasks: BackgroundTasks, q: st
     return {"message": "Message sent"}
 
 
-@app.websocket("/ws/send-notification/{email}")
-async def websocket_endpoint(websocket: WebSocket, email: str):
+@app.websocket("/ws/send-notification/{domain}")
+async def websocket_endpoint(websocket: WebSocket, domain: str):
     await websocket.accept()
     while True:
         try:
-            # Wait for any message from the client
-            await websocket.receive_text()
+            username = await websocket.receive_text()
+
+            email = f"{username.strip()}@{domain}"
 
             await websocket.send_json({"message": f"Sending email to {email}"})
 
             message = f"message to {email}\n"
             await run_in_threadpool(write_log, message)
 
-            await websocket.send_json({"message": "Message sent"})
+            await websocket.send_json({"message": f"Message sent to {email}"})
 
         except WebSocketDisconnect:
             pass
