@@ -2,7 +2,7 @@
 
 # run app
 run:
-	uvicorn fasttask.main:app --reload
+	uvicorn fastws.main:app --reload
 
 # connect to websocket
 ws:

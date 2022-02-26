@@ -1,7 +1,7 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="fasttask",
+    name="fastws",
     version="0.0.0",
     description="FastAPI Background Task Demo",
     python_requires=">=3.7",
