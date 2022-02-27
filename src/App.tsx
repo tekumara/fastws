@@ -1,25 +1,29 @@
-import type { Component } from 'solid-js';
-
-import logo from './logo.svg';
-import styles from './App.module.css';
+import type { Component } from "solid-js";
+import { createSignal } from "solid-js";
 
 const App: Component = () => {
+  const [message, setMessage] = createSignal("");
+
+  // open websocket
+  const ws = new WebSocket("ws://localhost:8000/ws/send-notification/solid.io");
+  ws.onmessage = (ev) => {
+    const recv = JSON.parse(ev.data);
+    console.log(recv);
+    setMessage(recv.message);
+  };
+
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
+    <div>
+      Email user: <textarea id="username"></textarea>
+      <br />
+      <br />
+      <button
+        onClick={() => ws.send(document.getElementById("username").value)}
+      >
+        Send
+      </button>
+      <br />
+      Server message: {message()}
     </div>
   );
 };
