@@ -41,7 +41,7 @@ lint: $(venv)
 	$(venv)/bin/flake8
 
 node_modules: package.json
-	npm install --no-save
+	npm install
 	touch node_modules
 
 ## pyright

@@ -6,7 +6,15 @@ run:
 
 # connect to websocket
 ws:
-	@echo "Enter any message to send a background email!"
+	@echo "Enter an username to send a email!"
 	websocat ws://localhost:8000/ws/send-notification/awesome.io
+
+# start vite dev server
+start:
+	npm start
+
+# build production app in dist/
+build:
+	npm run build
 
 include *.mk
